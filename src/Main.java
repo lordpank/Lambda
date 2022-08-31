@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
 
 
 public class Main {
@@ -18,6 +19,10 @@ public class Main {
         human.add(new Person("Роман", "Матрос де мурк", random.nextInt(MAXIMUM_AGE) + 1));
 
         System.out.println(human);
+
+        Predicate<Person> predicate = person -> person.getAge() < 18;
+        human.removeIf(predicate);
+
         Collections.sort(human, new PeopleComparator(2));
         System.out.println(human);
     }
