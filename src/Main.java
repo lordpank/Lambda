@@ -1,8 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 
 public class Main {
     private static final int MAXIMUM_AGE = 99;
@@ -10,15 +7,27 @@ public class Main {
     public static void main(String[] args) {
         Random random = new Random();
         List<Person> human = new ArrayList<>();
-        human.add(new Person("Ð’Ð¸ÐºÑ‚Ð¾Ñ€", "Ð“Ð°Ð²Ñ€Ð¸Ð»Ð¾Ð²ÑÐºÐ¸Ð¼Ð¾ÑÐºÐ¸Ð¹", random.nextInt(MAXIMUM_AGE) + 1));
-        human.add(new Person("Ð¡Ñ‚Ð°Ð½Ð¸ÑÐ»Ð°Ð²", "ÐœÐµÑ€Ñ‡ ÐºÐ»Ð¸Ð½Ð¾Ð²ÑÐºÐ¸Ð¹", random.nextInt(MAXIMUM_AGE) + 1));
-        human.add(new Person("ÐÐ¸ÐºÐ¾Ð»Ð°Ð¹", "Ð´Ðµ Ð‘ÑƒÑ…Ð»Ð¾Ð²ÑÐºÐ¸Ð¹", random.nextInt(MAXIMUM_AGE) + 1));
-        human.add(new Person("ÐšÐ¾Ð½ÑÑ‚Ð°Ð½Ñ‚Ð¸Ð½", "ÐœÐ°Ñ€Ð¸Ð°Ñ€Ñ… Ð´Ðµ Ð–ÑƒÐ»Ð¸", random.nextInt(MAXIMUM_AGE) + 1));
-        human.add(new Person("ÐÐ»ÐµÐºÑÐ°Ð½Ð´Ñ€", "ÑˆÑ‚Ñ€Ð¸Ñ… Ð›Ñ Ð’Ð¾Ð½", random.nextInt(MAXIMUM_AGE) + 1));
-        human.add(new Person("Ð Ð¾Ð¼Ð°Ð½", "ÐœÐ°Ñ‚Ñ€Ð¾Ñ Ð´Ðµ Ð¼ÑƒÑ€Ðº", random.nextInt(MAXIMUM_AGE) + 1));
+        human.add(new Person("Âèêòîð", "Ãàâðèëîâñêèìîñêèé", random.nextInt(MAXIMUM_AGE) + 1));
+        human.add(new Person("Ñòàíèñëàâ", "Ìåð÷ êëèíîâñêèé", random.nextInt(MAXIMUM_AGE) + 1));
+        human.add(new Person("Íèêîëàé", "äå Áóõëîâñêèé", random.nextInt(MAXIMUM_AGE) + 1));
+        human.add(new Person("Êîíñòàíòèí", "Ìàðèàðõ äå Æóëè", random.nextInt(MAXIMUM_AGE) + 1));
+        human.add(new Person("Àëåêñàíäð", "øòðèõ Ëÿ Âîí", random.nextInt(MAXIMUM_AGE) + 1));
+        human.add(new Person("Ðîìàí", "Ìàòðîñ äå ìóðê", random.nextInt(MAXIMUM_AGE) + 1));
 
         System.out.println(human);
-        Collections.sort(human, new PeopleComparator(2));
+        Collections.sort(human, (a, b) ->
+                {
+                    int intPerson = a.getSurname().split(" ").length;
+                    int outPerson = b.getSurname().split(" ").length;
+                    int whole = outPerson - intPerson;
+                    if ((intPerson >= 2 && outPerson >= 2) || whole == 0) {
+                        return b.getAge() - a.getAge();
+                    } else {
+                        return whole;
+                    }
+                }
+        );
+
         System.out.println(human);
     }
 }
